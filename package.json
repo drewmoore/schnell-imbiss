@@ -1,0 +1,22 @@
+{
+  "name": "schnell-imbiss",
+  "version": "1.0.0",
+  "description": "Get familiar with the exciting world of test-driven development!",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drewmoore/schnell-imbiss.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/drewmoore/schnell-imbiss/issues"
+  },
+  "homepage": "https://github.com/drewmoore/schnell-imbiss#readme",
+  "dependencies": {
+    "jest": "^26.1.0"
+  }
+}
