@@ -18,16 +18,11 @@ const getItemsForNames = (menuItemNames) => (
  * @returns {string} the formatted, localised price
  */
 const localisePrice = (price, locale) => {
-  /*
-   * Implement me!
-   * Hint: .toFixed() might help...
-   */
-   if (locale === 'de') {
-     return price.toFixed(2).replace('.', ',') + ' €';
-   } else {
-     return '€' + price.toFixed(2);
-
-   }
+  if (locale === "de") {
+    return price.toFixed(2).replace(".", ",") + " €";
+  } else {
+    return "€" + price.toFixed(2);
+  }
 };
 
 // "Public" functions
@@ -38,12 +33,10 @@ const localisePrice = (price, locale) => {
  * @returns {Array} names of all items on the menu
  */
 const getMenuItemNames = (limit = null) => {
-  const allNames = Object.values(menu).map((menuItem) => menuItem.name);
-
-  /*
-   * Can you implement a limit here? I bet you can...
-   */
-
+  let allNames = Object.values(menu).map((menuItem) => menuItem.name);
+  if (limit != null ) {
+    allNames = allNames.slice(0,limit);
+  };
   return allNames;
 };
 
@@ -57,11 +50,13 @@ const getMenuItemPrices = (menuItemNames, locale) => {
   const supportedLocales = ['de', 'en-GB'];
 
   // Write a "guard clause" here to throw an error if the supportedLocales do not include the given locale
-
+  if (!supportedLocales.includes(locale)) throw `Locale ${locale} not supported!`;
   // Select all menu items that have the provided names
   const items = getItemsForNames(menuItemNames);
   // Get the prices from each of the items
-  const prices = items.map(item => item.price);
+  const prices = items.map((item) => {
+    return item.price;
+  });
   // Format the prices into localised strings.
   const localisedPrices = prices.map((price) => (localisePrice(price, locale)));
 
@@ -91,14 +86,15 @@ const getPizzaToppings = (varietyName) => {
  * @returns {Promise<string>} A report of your order and your total. Enjoy!
  */
 const placeOrder = (itemsAndQuantities, locale) => {
-  const priceTotal = Object.keys(itemsAndQuantities).reduce((total, itemName) => {
+  const items = Object.keys(itemsAndQuantities);
+  const priceTotal = items.reduce((total, itemName) => {
     const quantity = itemsAndQuantities[itemName];
     total += getItemsForNames([itemName])[0].price * quantity;
     return total;
   }, 0);
   // Bonus: we iterate through itemsAndQuantities twice. Once we have test coverage, we can probably refactor
   // for optimisation...
-  const messageWithoutTotal = Object.keys(itemsAndQuantities).reduce((message, itemName) => {
+  const messageWithoutTotal = items.reduce((message, itemName) => {
     const quantity = itemsAndQuantities[itemName];
     message += ` ${quantity} x ${itemName}`;
     return message;

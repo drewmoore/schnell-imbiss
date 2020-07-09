@@ -46,20 +46,26 @@ describe('App', () => {
   });
 
   describe('getPizzaToppings', () => {
-    /*
-     * Oh no! We have missing test coverage! We better write some tests before we deploy any bugs to production!!!
-     * Expected behaviour: getPizzaToppings(NAME_OF_VARIETY) should return an array of this pizza variety's toppings.
-     */
+    it("returns the pizza varietys toppings", () => {
+      const nameOfVariety = "Sucuk";
+      const expectedToppings = [
+        "Gouda",
+        "Hirtenkäse",
+        "Sucuk",
+        "Zwiebeln",
+        "Oliven",
+      ];
+      expect(getPizzaToppings(nameOfVariety)).toEqual(expectedToppings);
+    });
   });
 
   describe('placeOrder', () => {
-    /*
-     * Oh no! More missing test coverage. This one is a bit tricky...
-     * Example of expected behaviour:
-     *
-     * placeOrder({'Leckeres Eis': 2, 'Pizza': 3}, 'de');
-     * resolves with:
-     * Thank you for dining with Schnell Imbiss! Here is your order of: 2 x Leckeres Eis 3 x Pizza. Your total is: 26,50 €.
-     */
+    it("return a string with information about the order including items and total price", () => {
+      const order = { "Leckeres Eis": 2, Pizza: 3 };
+      const results = placeOrder(order, "de");
+      const expectedOutput =
+        "Thank you for dining with Schnell Imbiss! Here is your order of: 2 x Leckeres Eis 3 x Pizza. Your total is: 26,50 €";
+      expect(results).resolves.toBe(expectedOutput);
+    });
   });
 });
