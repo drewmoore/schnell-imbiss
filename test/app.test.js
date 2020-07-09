@@ -3,7 +3,7 @@ const { getMenuItemNames, getMenuItemPrices, getPizzaToppings, placeOrder } = re
 describe('App', () => {
   describe('getMenuItemNames', () => {
     it('returns names of all menu items', () => {
-      const expectedNames = ['Döner Kebab', 'Currywurst & Pommes', 'Pizza', 'Falafel im Brot'];
+      const expectedNames = ['Döner Kebab', 'Currywurst & Pommes', 'Pizza', 'Falafel im Brot', 'Leckeres Eis'];
       const results = getMenuItemNames();
 
       expect(results).toEqual(expectedNames);
@@ -34,7 +34,7 @@ describe('App', () => {
       expect(results).toEqual(expectedPrices);
     });
 
-    it('throws an error if the provided locale is not supported', () => {
+    it.only('throws an error if the provided locale is not supported', () => {
       const menuItemNames = ['Currywurst & Pommes'];
       const unsupportedLocale = 'Dothraki';
       const expectedErrorMessage = `Locale ${unsupportedLocale} not supported!`;
