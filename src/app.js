@@ -22,8 +22,10 @@ const localisePrice = (price, locale) => {
    * Implement me!
    * Hint: .toFixed() might help...
    */
-
-  return price;
+  if(locale === 'de') return price.toFixed(2).replace('.', ',') + ' €';
+  if(locale === 'en-GB') return '€'+price.toFixed(2);
+  
+ 
 };
 
 // "Public" functions
@@ -34,11 +36,19 @@ const localisePrice = (price, locale) => {
  * @returns {Array} names of all items on the menu
  */
 const getMenuItemNames = (limit = null) => {
-  const allNames = Object.values(menu).map((menuItem) => menuItem.name);
+  let allNames = Object.values(menu).map((menuItem) => menuItem.name);
 
   /*
    * Can you implement a limit here? I bet you can...
    */
+  if(limit){
+    allNames = allNames.filter((el, index) => {
+      if(index< limit){
+        return true;
+      }
+      return false;
+    });
+  }
 
   return allNames;
 };
@@ -52,11 +62,17 @@ const getMenuItemNames = (limit = null) => {
 const getMenuItemPrices = (menuItemNames, locale) => {
   const supportedLocales = ['de', 'en-GB'];
   // Write a "guard clause" here to throw an error if the supportedLocales do not include the given locale
-
+  if(!supportedLocales.includes(locale)){
+    throw new Error(`Locale ${locale} not supported!`);
+  }
   // Select all menu items that have the provided names
   const items = getItemsForNames(menuItemNames);
   // Get the prices from each of the items
-  const prices = [];
+  // console.log(items);
+  const prices = items.map(el => {
+    return el.price;
+  })
+
   // Format the prices into localised strings.
   const localisedPrices = prices.map((price) => (localisePrice(price, locale)));
 
