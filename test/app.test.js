@@ -34,7 +34,7 @@ describe('App', () => {
       expect(results).toEqual(expectedPrices);
     });
 
-    it('throws an error if the provided locale is not supported', () => {
+    it.only('throws an error if the provided locale is not supported', () => {
       const menuItemNames = ['Currywurst & Pommes'];
       const unsupportedLocale = 'Dothraki';
       const expectedErrorMessage = `Locale ${unsupportedLocale} not supported!`;

@@ -20,7 +20,7 @@ const getItemsForNames = (menuItemNames) => (
 const localisePrice = (price, locale) => {
   if (locale === "de") {
     return price.toFixed(2).replace(".", ",") + " €";
-  } else if (locale === "en-GB") {
+  } else {
     return "€" + price.toFixed(2);
   }
 };
@@ -48,6 +48,7 @@ const getMenuItemNames = (limit = null) => {
  */
 const getMenuItemPrices = (menuItemNames, locale) => {
   const supportedLocales = ['de', 'en-GB'];
+
   // Write a "guard clause" here to throw an error if the supportedLocales do not include the given locale
   if (!supportedLocales.includes(locale)) throw `Locale ${locale} not supported!`;
   // Select all menu items that have the provided names
